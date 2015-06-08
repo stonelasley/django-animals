@@ -1,6 +1,8 @@
 Django Animals
 ============
 
+[![Build Status](https://travis-ci.org/stonelasley/django-animals.svg)](https://travis-ci.org/stonelasley/django-animals)
+
 A small app intended to help me track pet records
 
 Installation
