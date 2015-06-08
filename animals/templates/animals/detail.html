@@ -1,0 +1,14 @@
+{% extends "animals/base.html" %}
+{% block content %}
+<div class="row">
+  <div class="large-12 columns">
+      <h4>{{ animal.name }} the <span>{{ animal.breed }}</span></h4>
+  </div>
+</div>
+<div class="row">
+    <div class="large12 columns">
+          {{ animal.about }}
+    </div>
+</div>
+{% endblock %}
+
