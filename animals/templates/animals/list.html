@@ -1,0 +1,23 @@
+{% extends "animals/base.html" %}
+{% block content %}
+{% if animals %}
+    {% for animal in animals %}
+        <div>
+        <h2>{{ animal.name }}</h2>
+        </div>
+        <div>
+            <ul>
+                <li><strong>Breed:</strong> {{ animal.breed }}</li>
+                <li><strong>Birthdate:</strong> {{ animal.birth_date }}</li>
+                <li><strong>Micro Chip:</strong> {{ animal.microchip_id }}</li>
+                <li><strong>About: </strong>{{ animal.about }}</li>
+                <li><a href="{% url 'animals:detail' animal.id %}">View</a></li>
+            </ul>
+        </div>
+    {% endfor %}
+{% else %}
+    <div>
+        <p>No Animals</p>
+    </div>
+{% endif %}
+{% endblock %}
