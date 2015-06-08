@@ -3,6 +3,11 @@ Django Animals
 .. image:: https://travis-ci.org/stonelasley/django-animals.svg
     :target: https://travis-ci.org/stonelasley/django-animals
 
+.. image:: https://coveralls.io/repos/stonelasley/django-animals/badge.svg
+  :target: https://coveralls.io/r/stonelasley/django-animals
+
+
+
 A small app intended to help me track pet records
 
 Installation
