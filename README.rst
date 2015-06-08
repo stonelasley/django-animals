@@ -1,7 +1,7 @@
 Django Animals
 ============
-
-[![Build Status](https://travis-ci.org/stonelasley/django-animals.svg)](https://travis-ci.org/stonelasley/django-animals)
+.. image:: https://travis-ci.org/stonelasley/django-animals.svg
+    :target: https://travis-ci.org/stonelasley/django-animals
 
 A small app intended to help me track pet records
 
