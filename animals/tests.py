@@ -1,6 +1,3 @@
-from django.contrib.auth.models import AnonymousUser, User
-from django.test import TestCase
-from django.test import Client
 from django.test import TestCase, RequestFactory
 
 from animals.models import Animal, Breed, Food, Brand
