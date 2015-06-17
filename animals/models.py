@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.utils import http
 
 from livefield import LiveField, LiveManager
 
@@ -68,6 +68,9 @@ class Breed(Persistable):
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200, blank=True)
 
+    def wiki_link(self):
+        return "http://www.wikipedia.com/wiki/{}".format(self.name)
+
     def __str__(self):
         return self.name
 
@@ -86,7 +89,6 @@ class Animal(Persistable):
 
     def __str__(self):
         return self.name
-
 
 class Feeding(Persistable):
     HR = 'Hour'

@@ -211,3 +211,10 @@ class AnimalsModelTests(TestCase):
         self.assertIsNotNone(self.brand)
         self.assertFalse(self.brand.live)
         self.assertEqual(self.brand.name, "BrandName")
+
+    def test_breed_wiki_link_url(self):
+        """
+        Test Brand Soft Delete
+        :return: None
+        """
+        self.assertEqual("http://www.wikipedia.com/wiki/BreedName", self.animal.breed.wiki_link())
