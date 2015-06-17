@@ -1,47 +1,48 @@
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from animals.models import Animal, Brand, Feeding, Food, Breed, Vet
 
-from animals.models import Animal
-from animals.forms import AnimalForm
+class FeedingInline(admin.StackedInline):
+    model = Feeding
+    fieldsets = [
+        ('Feed',               {'fields': ['food_amount', 'food_measurement', 'food', 'occurrence', 'interval']}),
+        ('Notes', {'fields': ['note'], 'classes': ['collapse']}),
+    ]
+    extra = 1
 
-class Index(ListView):
-    context_object_name = 'animals'
-    template_name = "animals/list.html"
+class AnimalAdmin(admin.ModelAdmin):
+    fields = ['name', 'birth_date', 'breed', 'microchip_id', 'about', 'private']
+    inlines = [FeedingInline]
 
-    def get_queryset(self):
-        return Animal.objects.order_by('-created')[:5]
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.user = request.user
+        obj.save()
 
-class AnimalNewIndex(ListView):
-    context_object_name = 'animals'
-    template_name = "animals/list.html"
+class FoodInline(admin.TabularInline):
+    fields = ('name', 'upc', 'featured')
+    model = Food
+    extra = 3
 
-    def get_queryset(self):
-        return Animal.objects.order_by('-created')[:5]
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url', 'featured')
+    fields = ['name', 'url', 'featured']
+    inlines = [FoodInline]
 
-class AnimalDetail(DetailView):
-    model = Animal
-    template_name = "animals/detail.html"
+# class ProfileInline(admin.StackedInline):
+#     model = UserProfile
+#     can_delete = False
+#     verbose_name_plural = 'profile'
 
-class AnimalUpdate(UpdateView):
-    model = Animal
-    template_name = "animals/form.html"
-    form_class = AnimalForm
-    success_url = '/pups'
+# class UserAdmin(UserAdmin):
+#     inlines = (ProfileInline,)
 
-class AnimalCreate(CreateView):
-    model = Animal
-    template_name = "animals/form.html"
-    form_class = AnimalForm
-    success_url = '/pups'
+admin.site.unregister(User)
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        if self.request.user.is_authenticated():
-            self.object.user = self.request.user
-        self.object.save()
+admin.site.register(Animal, AnimalAdmin)
+admin.site.register(Brand, BrandAdmin)
+admin.site.register(Breed)
+admin.site.register(User, UserAdmin)
+admin.site.register(Vet)
 
-        return super(AnimalCreate, self).form_valid(form)
-
-class AnimalDelete(DeleteView):
-    model = Animal
-    success_url = reverse_lazy('/pups')
