@@ -14,9 +14,9 @@ install:
  - pip install .
  - pip install coverage
 
-script: coverage run manage.py test animals
+script: coverage run manage.py test animals.tests 
 
 after_success:
   - coverage report
-  - pip install --quiet python-coveralls
+  - pip install -q python-coveralls
   - coveralls
