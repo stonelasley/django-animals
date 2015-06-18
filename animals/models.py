@@ -4,7 +4,13 @@ from livefield import LiveField, LiveManager
 
 
 class IntegerRangeField(models.IntegerField):
-    def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
+    def __init__(
+            self,
+            verbose_name=None,
+            name=None,
+            min_value=None,
+            max_value=None,
+            **kwargs):
         self.min_value, self.max_value = min_value, max_value
         models.IntegerField.__init__(self, verbose_name, name, **kwargs)
 
@@ -128,14 +134,26 @@ class Feeding(Persistable):
         (MG, 'Milligram'),
     )
 
-    interval = models.CharField(max_length=5, choices=INTERVAL_CHOICES, default=DY)
+    interval = models.CharField(
+        max_length=5,
+        choices=INTERVAL_CHOICES,
+        default=DY
+    )
     food = models.ForeignKey(Food)
     alt_food = models.CharField(max_length=255, blank=True)
     food_amount = models.DecimalField('amount', max_digits=3, decimal_places=2)
-    food_measurement = models.CharField('measurement', max_length=9, choices=MEASUREMENT_CHOICES, default=EA)
+    food_measurement = models.CharField(
+        'measurement',
+        max_length=9,
+        choices=MEASUREMENT_CHOICES,
+        default=EA
+    )
     animal = models.ForeignKey(Animal)
     occurrence = IntegerRangeField(min_value=0, max_value=60)
     note = models.TextField(blank=True)
 
     def __str__(self):
-        return "{0} {1} times per {2}".format(self.food.name, self.occurrence, self.interval)
+        return "{0} {1} times per {2}".format(
+            self.food.name,
+            self.occurrence,
+            self.interval)
