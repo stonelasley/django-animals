@@ -1,7 +1,7 @@
 from django.db import models
-from django.utils import http
 
 from livefield import LiveField, LiveManager
+
 
 class IntegerRangeField(models.IntegerField):
     def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
@@ -9,9 +9,10 @@ class IntegerRangeField(models.IntegerField):
         models.IntegerField.__init__(self, verbose_name, name, **kwargs)
 
     def formfield(self, **kwargs):
-        defaults = {'min_value': self.min_value, 'max_value':self.max_value}
+        defaults = {'min_value': self.min_value, 'max_value': self.max_value}
         defaults.update(kwargs)
         return super(IntegerRangeField, self).formfield(**defaults)
+
 
 class Persistable(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -22,7 +23,7 @@ class Persistable(models.Model):
     objects = LiveManager()
     all_objects = LiveManager(include_soft_deleted=True)
 
-    def delete(self):
+    def delete(self, **kwargs):
         self.live = False
         self.save()
 
@@ -30,6 +31,7 @@ class Persistable(models.Model):
         abstract = True
 
     featured.boolean = True
+
 
 class Addressable(Persistable):
     street = models.CharField(max_length=200)
@@ -42,12 +44,14 @@ class Addressable(Persistable):
     class Meta:
         abstract = True
 
+
 class Vet(Addressable):
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
+
 
 class Brand(Persistable):
     name = models.CharField(max_length=200)
@@ -56,6 +60,7 @@ class Brand(Persistable):
     def __str__(self):
         return self.name
 
+
 class Food(Persistable):
     brand = models.ForeignKey(Brand)
     name = models.CharField(max_length=200)
@@ -63,6 +68,7 @@ class Food(Persistable):
 
     def __str__(self):
         return self.name
+
 
 class Breed(Persistable):
     name = models.CharField(max_length=200)
@@ -73,6 +79,7 @@ class Breed(Persistable):
 
     def __str__(self):
         return self.name
+
 
 class Animal(Persistable):
     name = models.CharField(max_length=255)
@@ -89,6 +96,7 @@ class Animal(Persistable):
 
     def __str__(self):
         return self.name
+
 
 class Feeding(Persistable):
     HR = 'Hour'
@@ -131,8 +139,3 @@ class Feeding(Persistable):
 
     def __str__(self):
         return "{0} {1} times per {2}".format(self.food.name, self.occurrence, self.interval)
-
-
-
-
-
