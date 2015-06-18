@@ -3,5 +3,4 @@ django-coverage
 django-nose
 django-livefield
 flake8
-ipdb
 tox
