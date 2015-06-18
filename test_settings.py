@@ -21,11 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-########## SECRET CONFIGURATION
+# ######## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-#SECRET_KEY = get_env_setting('SECRET_KEY')
+# SECRET_KEY = get_env_setting('SECRET_KEY')
 SECRET_KEY = '^v_9lw5v)p3s#v3!^y$4sclly4ddmcz9797_b&tux8ig(3_%)x'
-########## END SECRET CONFIGURATION
+# ######## END SECRET CONFIGURATION
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -48,6 +48,7 @@ DJANGO_APPS = (
 LOCAL_APPS = (
     'animals',
     'livefield',
+    'django_nose',
 )
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
@@ -63,6 +64,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'test_urls'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 TEMPLATES = [
     {
@@ -87,7 +90,7 @@ WSGI_APPLICATION = 'animals.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-########## DATABASE CONFIGURATION
+# ######## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
@@ -99,7 +102,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-########## END DATABASE CONFIGURATION
+# ######## END DATABASE CONFIGURATION
 
 
 # Internationalization

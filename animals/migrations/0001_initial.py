@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Animal',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False,
+                                        verbose_name='ID', auto_created=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('featured', models.BooleanField(default=False)),
@@ -36,7 +37,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Brand',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False,
+                                        verbose_name='ID', auto_created=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('featured', models.BooleanField(default=False)),
@@ -52,7 +54,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Breed',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False,
+                                        verbose_name='ID', auto_created=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('featured', models.BooleanField(default=False)),
@@ -68,15 +71,37 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Feeding',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False,
+                                        verbose_name='ID', auto_created=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('featured', models.BooleanField(default=False)),
                 ('live', livefield.fields.LiveField(default=True)),
-                ('interval', models.CharField(choices=[('Hour', 'Hour'), ('Day', 'Day'), ('Week', 'Week'), ('Month', 'Month')], max_length=5, default='Day')),
+                ('interval', models.CharField(
+                    choices=[
+                        ('Hour', 'Hour'),
+                        ('Day', 'Day'),
+                        ('Week', 'Week'),
+                        ('Month', 'Month')],
+                    max_length=5,
+                    default='Day')),
                 ('alt_food', models.CharField(max_length=255, blank=True)),
-                ('food_amount', models.DecimalField(max_digits=3, decimal_places=2, verbose_name='amount')),
-                ('food_measurement', models.CharField(choices=[('Each', 'Each'), ('Tspn', 'Teaspoon'), ('Tblsp', 'Tablespoon'), ('Cup', 'Cup'), ('Ml', 'Milliliter'), ('G', 'Gram'), ('MG', 'Milligram')], max_length=9, default='Each', verbose_name='measurement')),
+                ('food_amount', models.DecimalField(
+                    max_digits=3,
+                    decimal_places=2,
+                    verbose_name='amount')),
+                ('food_measurement', models.CharField(
+                    choices=[
+                        ('Each', 'Each'),
+                        ('Tspn', 'Teaspoon'),
+                        ('Tblsp', 'Tablespoon'),
+                        ('Cup', 'Cup'),
+                        ('Ml', 'Milliliter'),
+                        ('G', 'Gram'),
+                        ('MG', 'Milligram')],
+                    max_length=9,
+                    default='Each',
+                    verbose_name='measurement')),
                 ('occurrence', animals.models.IntegerRangeField()),
                 ('note', models.TextField(blank=True)),
                 ('animal', models.ForeignKey(to='animals.Animal')),
@@ -89,7 +114,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Food',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False,
+                                        verbose_name='ID', auto_created=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('featured', models.BooleanField(default=False)),
@@ -106,7 +132,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Vet',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False,
+                                        verbose_name='ID', auto_created=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('featured', models.BooleanField(default=False)),

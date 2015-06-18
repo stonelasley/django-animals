@@ -12,11 +12,11 @@ env:
 install:
  - pip install $DJANGO
  - pip install .
- - pip install coverage
+ - pip install -r test_requirements.txt 
 
-script: coverage run manage.py test animals
+script: coverage run manage.py test animals.tests 
 
 after_success:
   - coverage report
-  - pip install --quiet python-coveralls
+  - pip install -q python-coveralls
   - coveralls

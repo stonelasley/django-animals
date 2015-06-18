@@ -1,8 +1,7 @@
 from django.test import TestCase, RequestFactory
+from django.core.urlresolvers import reverse
 
 from animals.models import Animal, Breed, Food, Brand
-
-from django.core.urlresolvers import reverse
 
 
 def create_animal():
@@ -50,7 +49,10 @@ class AnimalsViewTests(TestCase):
         """
         response = self.client.get(reverse('animals:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['animals'], ['<Animal: AnimalName>'])
+        self.assertQuerysetEqual(
+            response.context['animals'],
+            ['<Animal: AnimalName>']
+        )
 
     def test_index_should_only_return_live_animals(self):
         """
@@ -146,7 +148,6 @@ class AnimalsModelTests(TestCase):
             upc='123456'
         )
         self.animal = Animal.objects.create(
-            #user=self.user,
             breed=self.breed,
             name="AnimalName",
             birth_date="2001-01-01",
@@ -198,7 +199,7 @@ class AnimalsModelTests(TestCase):
         self.assertFalse(self.food.live)
         self.assertEqual(self.food.name, "FoodName")
 
-    def test_food_soft_delete(self):
+    def test_brand_soft_delete(self):
         """
         Test Brand Soft Delete
         :return: None
@@ -211,3 +212,13 @@ class AnimalsModelTests(TestCase):
         self.assertIsNotNone(self.brand)
         self.assertFalse(self.brand.live)
         self.assertEqual(self.brand.name, "BrandName")
+
+    def test_breed_wiki_link_url(self):
+        """
+        Test Brand Soft Delete
+        :return: None
+        """
+        self.assertEqual(
+            "http://www.wikipedia.com/wiki/BreedName",
+            self.animal.breed.wiki_link()
+        )
