@@ -17,6 +17,7 @@ install:
 script: coverage run manage.py test animals.tests 
 
 after_success:
+  - flake8
   - coverage report
   - pip install -q python-coveralls
   - coveralls
