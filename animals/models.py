@@ -3,6 +3,8 @@ from django.db import models
 from livefield import LiveField, LiveManager
 
 
+
+
 class IntegerRangeField(models.IntegerField):
     def __init__(
             self,
