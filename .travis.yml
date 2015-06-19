@@ -1,26 +1,15 @@
-sudo: false
 language: python
-python:
- - "2.7"
-# - "3.2" excluding 3.2 until I can get submit a pull request to livefield project
- - "3.3"
- - "3.4"
-env:
-  matrix:
-   - DJANGO=Django==1.7
-   - DJANGO=Django==1.8
 install:
- - pip install $DJANGO
- - pip install .
- - pip install -r test_requirements.txt
-
-before_script:
- - flake8 --show-source
-
+  - pip install tox 
 script:
- - coverage run manage.py test animals.tests
+  - tox
 
 after_success:
- - coverage report
- - pip install -q python-coveralls
- - coveralls
+  - coverage report
+  - pip install -q python-coveralls
+  - coveralls
+
+env:
+  - TOXENV=django15
+  - TOXENV=django16
+  - TOXENV=coverage
