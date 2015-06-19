@@ -12,4 +12,4 @@ after_success:
 env:
   - TOXENV=django15
   - TOXENV=django16
-  - TOXENV=coverage
+  - TOXENV=django17
