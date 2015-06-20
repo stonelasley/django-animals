@@ -1,7 +1,8 @@
 import sys
 from django.forms import ModelForm
 
-from animals.models import  Animal
+from animals.models import Animal
+
 
 class AnimalForm(ModelForm):
     class Meta:
