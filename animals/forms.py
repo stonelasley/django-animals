@@ -8,7 +8,7 @@ class AnimalForm(ModelForm):
     class Meta:
         model = Animal
         exclude = ['user']
-        fields = ['name', 'breed', 'birth_date', 'microchip_id', 'about', 'private', ]
+        fields = ['name', 'breed', 'birth_date', 'microchip_id', 'about', 'profile_img', 'private', ]
 
     def throw(self):
         print >>sys.stderr, 'Form Throw!!!!'

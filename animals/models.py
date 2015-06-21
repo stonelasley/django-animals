@@ -89,6 +89,7 @@ class Breed(Persistable):
 
 class Animal(Persistable):
     name = models.CharField(max_length=255)
+    profile_img = models.ImageField(upload_to='pic_folder/', default='pic_folder/None/no-img.jpg', blank=True)
     breed = models.ForeignKey(Breed)
     birth_date = models.DateField('date of birth')
     microchip_id = models.CharField(max_length=255, blank=True)
