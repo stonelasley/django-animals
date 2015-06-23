@@ -3,10 +3,11 @@
 {% if animals %}
     {% for animal in animals %}
         <div>
-        <h2>{{ animal.name }}</h2>
+        <h3>{{ animal.name }}</h3>
         </div>
         <div>
-            <ul>
+            <img>
+                <li><img src="{{ MEDIA_URL }}{{ animal.profile_img }}"/></li>
                 <li><strong>Breed:</strong> {{ animal.breed }}</li>
                 <li><strong>Birthdate:</strong> {{ animal.birth_date }}</li>
                 <li><strong>Micro Chip:</strong> {{ animal.microchip_id }}</li>
